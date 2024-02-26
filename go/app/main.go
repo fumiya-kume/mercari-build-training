@@ -34,8 +34,8 @@ func addItem(c echo.Context) error {
 	res := Response{Message: message}
 
 	// http.StatusCreated(201) is also good choice.StatusOK
-  // but in that case, you need to implement and return a URL
-  //   that returns information on the posted item.
+	// but in that case, you need to implement and return a URL
+	//   that returns information on the posted item.
 	return c.JSON(http.StatusOK, res)
 }
 
@@ -75,7 +75,6 @@ func main() {
 	e.GET("/", root)
 	e.POST("/items", addItem)
 	e.GET("/image/:imageFilename", getImg)
-
 
 	// Start server
 	e.Logger.Fatal(e.Start(":9000"))
