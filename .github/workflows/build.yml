@@ -18,6 +18,7 @@ jobs:
     #   uses: actions/checkout@v3
     - name: Checkout
       run: /usr/bin/git init /home/runner/work/mercari-build-training/mercari-build-training &&
+           /usr/bin/git remote add origin https://github.com/fumiya-kume/mercari-build-training &&
            /usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +12610e3b0d5a06da852a16d63bde3a754264df79:refs/remotes/origin/fumiya-kume-patch-2 &&
            /usr/bin/git config --local --name-only --get-regexp core\.sshCommand &&
            /usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :" &&
