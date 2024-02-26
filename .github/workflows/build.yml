@@ -8,6 +8,18 @@ env:
 
 jobs:
   build:
+   runs-on: ubuntu-latest
+   defaults:
+     run:
+       working-directory: ./go
+   steps:
+   - name: Checkout
+     uses: actions/checkout@v3
+   - name: build application
+     run: go build app/main.go
+   - name: test application
+     run: go test
+  build_container:
     runs-on: ubuntu-latest
     permissions:
      contents: read
@@ -16,7 +28,6 @@ jobs:
     # Checkout repository
     - name: Checkout
       uses: actions/checkout@v3
-
     - name: Log in to the Container registry
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
@@ -36,11 +47,10 @@ jobs:
         pwd
         echo 'Tag: ${{ steps.meta.outputs.tags }}'
         echo 'Label: ${{ steps.meta.labels.tags }}'
-
-#    - name: Build and push Docker image
-#      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-#      with:
-#       context: <go or python>
-#       push: true
-#       tags: ${{ steps.meta.outputs.tags }}
-#       labels: ${{ steps.meta.outputs.labels }}
+    - name: Build and push Docker image
+      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      with:
+       context: go
+       push: true
+       tags: ${{ steps.meta.outputs.tags }}
+       labels: ${{ steps.meta.outputs.labels }}
