@@ -7,6 +7,16 @@ env:
  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  lint:
+   runs-on: ubuntu-latest
+   defaults:
+    run:
+     working-directory: ./go
+   steps:
+   - name: Checkout
+     uses: actions/checkout@3
+   - name: lint
+     run: test -z "$(go fmt ./... | tee /dev/stderr)"
   test:
    runs-on: ubuntu-latest
    defaults:
