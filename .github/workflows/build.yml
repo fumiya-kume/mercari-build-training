@@ -20,6 +20,7 @@ jobs:
       run: /usr/bin/git init /home/runner/work/mercari-build-training/mercari-build-training &&
            /usr/bin/git remote add origin https://github.com/fumiya-kume/mercari-build-training &&
            /usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +12610e3b0d5a06da852a16d63bde3a754264df79:refs/remotes/origin/fumiya-kume-patch-2 &&
+           /usr/bin/git checkout --progress --force -B fumiya-kume-patch-2 refs/remotes/origin/fumiya-kume-patch-2 &&
            /usr/bin/git checkout --progress --force -B fumiya-kume-patch-2 refs/remotes/origin/fumiya-kume-patch-2
 
     - name: Log in to the Container registry
